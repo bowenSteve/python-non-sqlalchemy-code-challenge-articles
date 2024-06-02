@@ -41,16 +41,18 @@ class Article:
 class Author:
     def __init__(self, name):
         self.name = name
-    @property
-    def name(self):
+    
+    def get_name(self):
         return self._name
-    @name.setter
-    def name(self,name):
+    
+    def set_name(self,name):
         if not isinstance(name, str) or len(name) == 0:
             return None
         if hasattr(self, '_name'):
             return None
         self._name = name
+        
+    name=property(get_name, set_name)
 
     def articles(self):
         return [article for article in Article.all if article.author == self]
